@@ -1,6 +1,6 @@
-# 🎮 GameScore — Catálogo de Videojuegos & Crítica (Práctica 5 React Native)
+# 🏎️ AutoVault — Catálogo de Altas Prestaciones & Superdeportivos (Práctica 5 React Native)
 
-Aplicación móvil desarrollada con **React Native** y **Expo (SDK 58)** siguiendo el tutorial de clase de **Midudev** ([Curso de React Native para principiantes](https://youtu.be/U23lNFm_J70)).
+Aplicación móvil desarrollada con **React Native** y **Expo (SDK 58)** siguiendo los principios arquitectónicos y buenas prácticas de la guía docente de clase y el tutorial de **Midudev** ([Curso de React Native para principiantes](https://youtu.be/U23lNFm_J70)).
 
 **Estudiante:** Aitor Portales Crespí  
 **Cicle Formatiu:** 2º SMX / DAM • Desenvolupament d'Aplicacions Multiplataforma / Web  
@@ -9,54 +9,57 @@ Aplicación móvil desarrollada con **React Native** y **Expo (SDK 58)** siguien
 
 ---
 
-## 🌟 ¿Qué es GameScore?
+## 🌟 ¿Qué es AutoVault?
 
-**GameScore** es una aplicación de catálogo y crítica de videojuegos inspirada en plataformas como Metacritic, IGN y Steam. Permite a los usuarios descubrir los títulos más aclamados por la prensa especializada, filtrar por géneros y plataformas, consultar fichas técnicas completas con sinopsis y citas de análisis, y gestionar su propia lista personal de deseados.
+**AutoVault** es una aplicación de automovilismo de altas prestaciones y superdeportivos inspirada en interfaces como Top Gear, Car and Driver y catálogos oficiales de fabricantes como Porsche, Ferrari y BMW M. 
 
-A nivel técnico, la aplicación sirve como demostración práctica y funcional de los 5 conceptos clave de la guía de clase de React Native:
-1. **Inicialización sin residuos (`npx`):** Construida directamente con `npx create-expo-app` para garantizar el uso de las últimas versiones sin dependencias globales obsoletas.
-2. **Estrategia de desarrollo web primero:** Optimizada para iterar rápidamente en navegador (`npm run web`) con *Fast Refresh* antes de probar en móviles físicos.
-3. **Arquitectura limpia desde plantilla vacía (*Blank Template*):** Código estructurado desde cero, separando datos (`src/data/`), componentes (`src/components/`) y estilos (`src/styles/`).
-4. **Componentes nativos esenciales:** Uso riguroso de `<View>`, `<Text>` e `<Image>` (tanto local con `require` como remota con `{ uri }`), aprovechando el comportamiento nativo de Flexbox (`flexDirection: 'column'`).
-5. **Entorno ligero y accesible:** Ejecutable al 100% en dispositivos reales mediante **Expo Go** (código QR) o en navegador, sin necesidad de instalar los pesados emuladores de Android Studio o Xcode.
+Permite explorar los vehículos más icónicos del mundo del motor, filtrar por categorías (Superdeportivos, Deportivos, Eléctricos, SUVs y 4x4, Gran Turismo), buscar en tiempo real por marca, modelo o motorización, consultar fichas técnicas de ingeniería completas (CV, aceleración 0-100, velocidad punta, veredictos de la prensa) y gestionar un garaje personal de favoritos.
 
----
-
-## 📱 Capturas y Funcionalidades Principales
-
-- **🔥 Destacado de la Crítica (Hero Banner):** Muestra el título con mayor valoración del momento con carátula panorámica, insignia de Metascore dinámica y botón de análisis rápido.
-- **🔍 Búsqueda en tiempo real y Filtros por Género:** Filtra instantáneamente entre títulos, estudios y plataformas mediante píldoras táctiles con scroll horizontal.
-- **🏷️ Badges de Puntuación Dinámicos:** Sistema de color adaptativo según el Metascore (Verde para Obra Maestra $\ge 90$, Ámbar para Notable $75-89$, Rojo para Regular $< 75$).
-- **📑 Modal Inmersivo de Ficha Técnica:** Al pulsar sobre cualquier tarjeta, se despliega una ficha con sinopsis, duración aproximada, distribuidora, plataformas y cita del analista.
-- **❤️ Lista Personal de Deseados:** Sistema de favoritos reactivo con contador en la barra de navegación inferior.
-- **📚 Pestaña de Guía Docente Integrada:** Sección dedicada que detalla los 5 puntos técnicos de la guía de clase con explicaciones pedagógicas.
+A nivel técnico, la aplicación implementa de forma práctica los 5 conceptos clave exigidos en la guía docente:
+1. **Inicialización sin residuos (`npx`):** Creada con `npx create-expo-app` para evitar instalaciones globales obsoletas (`npm install -g`), garantizando siempre la última versión estable del SDK de Expo.
+2. **Estrategia de desarrollo web primero:** Optimizada para iterar rápidamente en el navegador web (`npm run web`) con *Fast Refresh* casi instantáneo antes de pasar a dispositivos físicos.
+3. **Arquitectura limpia desde plantilla vacía (*Blank Template*):** Estructura creada desde cero, separando datos (`src/data/cars.js`), componentes modulares reutilizables (`src/components/`) y constantes de diseño (`src/styles/theme.js`).
+4. **Componentes nativos esenciales:** Uso riguroso de `<View>`, `<Text>` e `<Image>` (tanto local mediante `require` como remota mediante `{ uri }`), respetando el comportamiento nativo de Flexbox (`flexDirection: 'column'`) y la obligatoriedad de encapsular textos en `<Text>`.
+5. **Entorno ligero y accesible:** Demostración de que **NO es necesario instalar Android Studio ni Xcode**, ejecutando la app en dispositivos móviles físicos mediante **Expo Go (código QR)** o en el navegador web para no sobrecargar los equipos del aula.
 
 ---
 
-## 📁 Estructura del Proyecto
+## 📱 Funcionalidades Principales
+
+- **🔥 Vehículo Estrella (Hero Banner):** Presentación del bólido más destacado del catálogo (*Porsche 911 GT3 RS*) con fotografía panorámica, prestaciones clave y acceso directo a la ficha técnica.
+- **🔍 Búsqueda en tiempo real y Filtros por Categoría:** Filtro instantáneo por marcas (*Porsche, Ferrari, BMW, Mercedes-AMG, Ford, Audi, Toyota*), modelos o tipos de motor (*V8, Bóxer, Eléctrico, Híbrido*).
+- **📊 Tarjetas Técnicas (*CarCard*):** Visualización de potencia (CV), aceleración de 0 a 100 km/h, velocidad máxima, precio y botón de guardado en el garaje personal.
+- **📑 Ficha Técnica de Ingeniería (*Modal Inmersivo*):** Al pulsar sobre cualquier vehículo, se despliega una ficha técnica detallada con desglose de motor, transmisión, chasis, sinopsis aerodinámica y cita del análisis de la prensa del motor.
+- **❤️ Mi Garaje Personal:** Pestaña dedicada con los coches guardados por el usuario y contador dinámico en la barra de navegación.
+- **📚 Memoria Técnica Integrada:** Pestaña con la justificación pedagógica y técnica de los 5 puntos de la guía docente.
+
+---
+
+## 📁 Estructura del Repositorio
 
 ```text
 React 5/
-├── assets/                    # Recursos gráficos nativos (iconos y splash screen)
+├── assets/                    # Recursos multimedia nativos (iconos y splash screen)
 │   ├── icon.png
 │   └── splash-icon.png
 ├── src/
 │   ├── components/            # Componentes modulares de interfaz
-│   │   ├── BottomNav.js       # Barra de navegación inferior (Catálogo, Mi Lista, Guía)
-│   │   ├── CategoryChips.js   # Píldoras de filtro por género con scroll horizontal
+│   │   ├── BottomNav.js       # Barra de navegación inferior (Catálogo, Mi Garaje, Guía)
+│   │   ├── CarCard.js         # Tarjeta de coche con prestaciones, foto y botón de garaje
+│   │   ├── CarDetailModal.js  # Modal inmersivo con la ficha técnica completa del vehículo
+│   │   ├── CategoryChips.js   # Píldoras de filtro por categoría con scroll horizontal
 │   │   ├── ClassGuideView.js  # Vista técnica con la memoria de la práctica
-│   │   ├── FeaturedHero.js    # Banner del videojuego destacado
-│   │   ├── GameCard.js        # Tarjeta de juego con carátula, datos y botón de favoritos
-│   │   ├── GameDetailModal.js # Modal inmersivo con la ficha completa del juego
-│   │   ├── Header.js          # Barra superior con logotipo y branding
-│   │   ├── ScoreBadge.js      # Insignia de puntuación con colores dinámicos
-│   │   └── SearchBar.js       # Barra de búsqueda con icono y botón de borrado
+│   │   ├── FeaturedHero.js    # Banner panorámico del superdeportivo estrella
+│   │   ├── Header.js          # Barra superior con logotipo y branding AutoVault
+│   │   ├── SearchBar.js       # Barra de búsqueda con icono y botón de borrado
+│   │   └── SpecBadge.js       # Insignias de prestaciones mecánicas
 │   ├── data/
-│   │   └── games.js           # Base de datos con los videojuegos, notas y críticas
+│   │   └── cars.js            # Base de datos con los vehículos, prestaciones y análisis
 │   └── styles/
-│       └── theme.js           # Tokens de diseño (colores oscuros, espaciados y bordes)
+│       └── theme.js           # Tokens de diseño (asfalto, fibra de carbono, rojo deportivo)
 ├── App.js                     # Componente principal que coordina estados y navegación
 ├── index.js                   # Punto de arranque registrado con registerRootComponent
+├── metro.config.js            # Configuración oficial de Metro Bundler para Expo
 ├── app.json                   # Configuración del manifiesto de Expo
 ├── package.json               # Dependencias del proyecto (Expo 58, React 19, Vector Icons)
 ├── RESPUESTAS_TEORIA.md       # Memoria teórica completa de la práctica (Castellano)
@@ -73,7 +76,7 @@ React 5/
 npm install
 ```
 
-### 2. Probar en el Navegador Web (Desarrollo rápido)
+### 2. Probar en el Navegador Web (Recomendado en aula)
 ```bash
 npm run web
 ```
@@ -87,11 +90,11 @@ npm start
 2. Escanea el código QR que se genera en la terminal.
 3. La aplicación se ejecutará de forma nativa en tu dispositivo mediante la red WiFi local.
 
-### 4. Chequeo de Salud del Entorno
+### 4. Diagnóstico de Salud del Proyecto
 ```bash
 npx expo-doctor
 ```
-Valida que todas las dependencias y configuraciones estén 100% sincronizadas con el SDK de Expo.
+Verifica que las dependencias, SDK y configuraciones del manifiesto sean 100% compatibles (20/20 comprobaciones superadas).
 
 ---
 

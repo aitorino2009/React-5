@@ -14,61 +14,60 @@ import Header from './src/components/Header';
 import SearchBar from './src/components/SearchBar';
 import CategoryChips from './src/components/CategoryChips';
 import FeaturedHero from './src/components/FeaturedHero';
-import GameCard from './src/components/GameCard';
-import GameDetailModal from './src/components/GameDetailModal';
+import CarCard from './src/components/CarCard';
+import CarDetailModal from './src/components/CarDetailModal';
 import ClassGuideView from './src/components/ClassGuideView';
 import BottomNav from './src/components/BottomNav';
 
-import { GAMES_DATA, GENRES } from './src/data/games';
+import { CARS_DATA, CATEGORIES } from './src/data/cars';
 import { theme } from './src/styles/theme';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('explore'); // 'explore' | 'favorites' | 'guide'
+  const [activeTab, setActiveTab] = useState('explore'); // 'explore' | 'garage' | 'guide'
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todos');
-  const [favorites, setFavorites] = useState(['elden-ring-erdtree', 'baldurs-gate-3']);
-  const [selectedGame, setSelectedGame] = useState(null);
+  const [garageList, setGarageList] = useState(['porsche-911-gt3-rs', 'bmw-m3-competition']);
+  const [selectedCar, setSelectedCar] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  // Filtrado de juegos según búsqueda y género
-  const filteredGames = useMemo(() => {
-    return GAMES_DATA.filter((game) => {
+  // Filtrado de coches según búsqueda y categoría
+  const filteredCars = useMemo(() => {
+    return CARS_DATA.filter((car) => {
       const matchesCategory =
-        selectedCategory === 'Todos' || game.genre === selectedCategory;
+        selectedCategory === 'Todos' || car.category === selectedCategory;
       const q = searchQuery.toLowerCase().trim();
       const matchesQuery =
         !q ||
-        game.title.toLowerCase().includes(q) ||
-        game.developer.toLowerCase().includes(q) ||
-        game.genre.toLowerCase().includes(q) ||
-        game.platforms.some((p) => p.toLowerCase().includes(q));
+        car.brand.toLowerCase().includes(q) ||
+        car.model.toLowerCase().includes(q) ||
+        car.engine.toLowerCase().includes(q) ||
+        car.category.toLowerCase().includes(q);
 
       return matchesCategory && matchesQuery;
     });
   }, [searchQuery, selectedCategory]);
 
-  // Lista de favoritos
-  const favoriteGames = useMemo(() => {
-    return GAMES_DATA.filter((g) => favorites.includes(g.id));
-  }, [favorites]);
+  // Lista de coches guardados en el garaje personal
+  const savedCars = useMemo(() => {
+    return CARS_DATA.filter((c) => garageList.includes(c.id));
+  }, [garageList]);
 
-  // Toggle de favoritos
-  const handleToggleFavorite = (gameId) => {
-    setFavorites((prev) =>
-      prev.includes(gameId)
-        ? prev.filter((id) => id !== gameId)
-        : [...prev, gameId]
+  // Toggle de garaje/favoritos
+  const handleToggleGarage = (carId) => {
+    setGarageList((prev) =>
+      prev.includes(carId)
+        ? prev.filter((id) => id !== carId)
+        : [...prev, carId]
     );
   };
 
-  // Abrir modal de detalles
-  const handleSelectGame = (game) => {
-    setSelectedGame(game);
+  // Abrir ficha técnica completa
+  const handleSelectCar = (car) => {
+    setSelectedCar(car);
     setModalVisible(true);
   };
 
-  // Juego destacado para el banner
-  const featuredGame = GAMES_DATA[0];
+  const featuredCar = CARS_DATA[0]; // Porsche 911 GT3 RS
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -87,45 +86,45 @@ export default function App() {
             value={searchQuery}
             onChangeText={setSearchQuery}
             onClear={() => setSearchQuery('')}
-            totalCount={filteredGames.length}
+            totalCount={filteredCars.length}
           />
 
           <CategoryChips
-            categories={GENRES}
+            categories={CATEGORIES}
             selectedCategory={selectedCategory}
             onSelect={setSelectedCategory}
           />
 
-          {/* Banner destacado si no hay filtros activos */}
+          {/* Banner del coche estrella si no hay filtros activos */}
           {!searchQuery && selectedCategory === 'Todos' && (
             <FeaturedHero
-              game={featuredGame}
-              onSelect={handleSelectGame}
+              car={featuredCar}
+              onSelect={handleSelectCar}
             />
           )}
 
-          {/* Listado de juegos */}
+          {/* Listado de vehículos */}
           <View style={styles.listContainer}>
             <View style={styles.sectionHeaderRow}>
               <Text style={styles.sectionHeaderTitle}>
                 {searchQuery
                   ? `Resultados para "${searchQuery}"`
                   : selectedCategory !== 'Todos'
-                  ? `Juegos de ${selectedCategory}`
-                  : 'Novedades y Más Valorados'}
+                  ? `Vehículos: ${selectedCategory}`
+                  : 'Gama de Altas Prestaciones'}
               </Text>
             </View>
 
-            {filteredGames.length === 0 ? (
+            {filteredCars.length === 0 ? (
               <View style={styles.emptyState}>
                 <Ionicons
-                  name="search-outline"
+                  name="car-outline"
                   size={48}
                   color={theme.colors.textMuted}
                 />
-                <Text style={styles.emptyTitle}>No encontramos resultados</Text>
+                <Text style={styles.emptyTitle}>No hay vehículos con ese criterio</Text>
                 <Text style={styles.emptySub}>
-                  Prueba a buscar por otro término o limpia los filtros.
+                  Prueba a buscar por marca (Porsche, Ferrari, BMW...) o cambia de categoría.
                 </Text>
                 <Pressable
                   style={styles.clearSearchBtn}
@@ -138,13 +137,13 @@ export default function App() {
                 </Pressable>
               </View>
             ) : (
-              filteredGames.map((game) => (
-                <GameCard
-                  key={game.id}
-                  game={game}
-                  onSelect={handleSelectGame}
-                  isFavorite={favorites.includes(game.id)}
-                  onToggleFavorite={handleToggleFavorite}
+              filteredCars.map((car) => (
+                <CarCard
+                  key={car.id}
+                  car={car}
+                  onSelect={handleSelectCar}
+                  isFavorite={garageList.includes(car.id)}
+                  onToggleFavorite={handleToggleGarage}
                 />
               ))
             )}
@@ -152,32 +151,32 @@ export default function App() {
         </ScrollView>
       )}
 
-      {activeTab === 'favorites' && (
+      {activeTab === 'garage' && (
         <ScrollView
           style={styles.mainScroll}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.favoritesHeader}>
-            <Text style={styles.favHeading}>Mis Videojuegos Guardados</Text>
-            <Text style={styles.favSub}>
-              {favoriteGames.length === 1
-                ? '1 título en tu lista personal'
-                : `${favoriteGames.length} títulos en tu lista personal`}
+          <View style={styles.garageHeader}>
+            <Text style={styles.garageHeading}>Mi Garaje de Ensueño</Text>
+            <Text style={styles.garageSub}>
+              {savedCars.length === 1
+                ? '1 vehículo guardado en tu garaje'
+                : `${savedCars.length} vehículos guardados en tu garaje`}
             </Text>
           </View>
 
           <View style={styles.listContainer}>
-            {favoriteGames.length === 0 ? (
+            {savedCars.length === 0 ? (
               <View style={styles.emptyState}>
                 <Ionicons
-                  name="heart-dislike-outline"
+                  name="key-outline"
                   size={52}
                   color={theme.colors.textMuted}
                 />
-                <Text style={styles.emptyTitle}>Tu lista está vacía</Text>
+                <Text style={styles.emptyTitle}>Tu garaje está vacío</Text>
                 <Text style={styles.emptySub}>
-                  Marca el corazón en los juegos que quieras seguir o jugar próximamente.
+                  Guarda tus superdeportivos y coches favoritos pulsando el icono del corazón.
                 </Text>
                 <Pressable
                   style={styles.clearSearchBtn}
@@ -187,13 +186,13 @@ export default function App() {
                 </Pressable>
               </View>
             ) : (
-              favoriteGames.map((game) => (
-                <GameCard
-                  key={game.id}
-                  game={game}
-                  onSelect={handleSelectGame}
+              savedCars.map((car) => (
+                <CarCard
+                  key={car.id}
+                  car={car}
+                  onSelect={handleSelectCar}
                   isFavorite={true}
-                  onToggleFavorite={handleToggleFavorite}
+                  onToggleFavorite={handleToggleGarage}
                 />
               ))
             )}
@@ -207,16 +206,16 @@ export default function App() {
       <BottomNav
         activeTab={activeTab}
         onSelectTab={setActiveTab}
-        favoritesCount={favorites.length}
+        favoritesCount={garageList.length}
       />
 
-      {/* Modal inmersivo de detalle */}
-      <GameDetailModal
-        game={selectedGame}
+      {/* Modal inmersivo de ficha técnica */}
+      <CarDetailModal
+        car={selectedCar}
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        isFavorite={selectedGame ? favorites.includes(selectedGame.id) : false}
-        onToggleFavorite={handleToggleFavorite}
+        isFavorite={selectedCar ? garageList.includes(selectedCar.id) : false}
+        onToggleFavorite={handleToggleGarage}
       />
     </SafeAreaView>
   );
@@ -276,7 +275,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.md,
   },
   clearSearchBtn: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.racingRed,
     paddingHorizontal: theme.spacing.lg,
     paddingVertical: theme.spacing.sm + 2,
     borderRadius: theme.borderRadius.sm,
@@ -286,18 +285,18 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
-  favoritesHeader: {
+  garageHeader: {
     paddingHorizontal: theme.spacing.md,
     paddingTop: theme.spacing.md,
     paddingBottom: theme.spacing.xs,
   },
-  favHeading: {
+  garageHeading: {
     fontSize: 20,
     fontWeight: '800',
     color: theme.colors.textPrimary,
     marginBottom: 2,
   },
-  favSub: {
+  garageSub: {
     fontSize: 13,
     color: theme.colors.textSecondary,
   },

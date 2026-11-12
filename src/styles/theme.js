@@ -1,38 +1,32 @@
 export const theme = {
   colors: {
-    // Backgrounds
-    background: '#0B0F19', // Deep obsidian midnight
-    surface: '#131B2E',    // Primary card / container
-    surfaceElevated: '#1B2640', // Hover / elevated items
-    surfaceSubtle: '#0F1626',   // Inputs / inner wells
-    border: '#1F2C47',     // Card borders
-    borderHighlight: '#334771', // Focused / hovered borders
+    // Backgrounds (Estilo fibra de carbono y asfalto nocturno)
+    background: '#080C14',
+    surface: '#111827',
+    surfaceElevated: '#1A2338',
+    surfaceSubtle: '#0D1422',
+    border: '#1E293B',
+    borderHighlight: '#334155',
 
-    // Text hierarchy
-    textPrimary: '#F8FAFC',   // High-contrast clean white
-    textSecondary: '#94A3B8', // Soft slate
-    textMuted: '#64748B',     // Dimmed labels
-    textInverted: '#0B0F19',
+    // Textos
+    textPrimary: '#F8FAFC',
+    textSecondary: '#94A3B8',
+    textMuted: '#64748B',
+    textInverted: '#080C14',
 
-    // Accents & Metacritic Rating colors
-    scoreGreen: '#10B981',      // 90-100 Universal Acclaim
-    scoreGreenBg: 'rgba(16, 185, 129, 0.15)',
-    scoreGreenBorder: '#059669',
+    // Acentos automovilísticos
+    racingRed: '#EF4444',
+    racingRedGlow: 'rgba(239, 68, 68, 0.18)',
+    sportBlue: '#3B82F6',
+    sportBlueGlow: 'rgba(59, 130, 246, 0.18)',
+    amberGold: '#F59E0B',
+    turboGreen: '#10B981',
 
-    scoreYellow: '#F59E0B',     // 75-89 Generally Favorable
-    scoreYellowBg: 'rgba(245, 158, 11, 0.15)',
-    scoreYellowBorder: '#D97706',
-
-    scoreRed: '#EF4444',        // < 75 Mixed or Average
-    scoreRedBg: 'rgba(239, 68, 68, 0.15)',
-    scoreRedBorder: '#DC2626',
-
-    primary: '#6366F1',         // Electric Indigo
-    primaryLight: '#818CF8',
-    primaryGlow: 'rgba(99, 102, 241, 0.25)',
-
-    accentPink: '#EC4899',      // Favorite / Heart
-    accentCyan: '#06B6D4',
+    // Identidad
+    primary: '#EF4444', // Rojo Deportivo
+    primaryLight: '#F87171',
+    primaryDark: '#B91C1C',
+    accentHeart: '#EC4899',
   },
   spacing: {
     xs: 4,

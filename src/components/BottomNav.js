@@ -8,19 +8,19 @@ export default function BottomNav({ activeTab, onSelectTab, favoritesCount }) {
     {
       id: 'explore',
       label: 'Catálogo',
-      icon: 'game-controller',
-      outlineIcon: 'game-controller-outline',
+      icon: 'car-sport',
+      outlineIcon: 'car-sport-outline',
     },
     {
-      id: 'favorites',
-      label: 'Mi Lista',
-      icon: 'heart',
-      outlineIcon: 'heart-outline',
+      id: 'garage',
+      label: 'Mi Garaje',
+      icon: 'bookmark',
+      outlineIcon: 'bookmark-outline',
       badge: favoritesCount,
     },
     {
       id: 'guide',
-      label: 'Guía Docente',
+      label: 'Guía Técnica',
       icon: 'book',
       outlineIcon: 'book-outline',
     },
@@ -41,7 +41,7 @@ export default function BottomNav({ activeTab, onSelectTab, favoritesCount }) {
                 <Ionicons
                   name={isActive ? tab.icon : tab.outlineIcon}
                   size={22}
-                  color={isActive ? theme.colors.primaryLight : theme.colors.textMuted}
+                  color={isActive ? theme.colors.racingRed : theme.colors.textMuted}
                 />
                 {tab.badge > 0 && (
                   <View style={styles.badgePill}>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -4,
     right: -10,
-    backgroundColor: theme.colors.accentPink,
+    backgroundColor: theme.colors.racingRed,
     minWidth: 18,
     height: 18,
     borderRadius: 9,
@@ -117,4 +117,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-

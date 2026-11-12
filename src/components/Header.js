@@ -8,16 +8,16 @@ export default function Header() {
     <View style={styles.header}>
       <View style={styles.brandRow}>
         <View style={styles.logoBadge}>
-          <Ionicons name="game-controller" size={20} color="#FFFFFF" />
+          <Ionicons name="car-sport" size={22} color="#FFFFFF" />
         </View>
         <View style={styles.brandTextCol}>
           <View style={styles.titleRow}>
-            <Text style={styles.brandName}>GameScore</Text>
+            <Text style={styles.brandName}>AutoVault</Text>
             <View style={styles.liveTag}>
-              <Text style={styles.liveTagText}>2024</Text>
+              <Text style={styles.liveTagText}>2024 ED.</Text>
             </View>
           </View>
-          <Text style={styles.brandSub}>Catálogo de Crítica y Metacritic</Text>
+          <Text style={styles.brandSub}>Catálogo de Altas Prestaciones & Superdeportivos</Text>
         </View>
       </View>
     </View>
@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     gap: theme.spacing.sm + 2,
   },
   logoBadge: {
-    width: 38,
-    height: 38,
+    width: 40,
+    height: 40,
     borderRadius: 10,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.racingRed,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -54,17 +54,17 @@ const styles = StyleSheet.create({
   },
   brandName: {
     color: theme.colors.textPrimary,
-    fontSize: 20,
+    fontSize: 21,
     fontWeight: '900',
     letterSpacing: -0.5,
   },
   liveTag: {
-    backgroundColor: 'rgba(99, 102, 241, 0.2)',
+    backgroundColor: 'rgba(239, 68, 68, 0.2)',
     paddingHorizontal: 6,
     paddingVertical: 1,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: 'rgba(99, 102, 241, 0.35)',
+    borderColor: 'rgba(239, 68, 68, 0.4)',
   },
   liveTagText: {
     color: theme.colors.primaryLight,

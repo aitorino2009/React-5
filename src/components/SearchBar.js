@@ -15,7 +15,7 @@ export default function SearchBar({ value, onChangeText, onClear, totalCount }) 
         />
         <TextInput
           style={styles.input}
-          placeholder="Buscar títulos, estudios o sagas..."
+          placeholder="Buscar marcas, modelos o motores (Porsche, V8...)"
           placeholderTextColor={theme.colors.textMuted}
           value={value}
           onChangeText={onChangeText}
@@ -29,7 +29,7 @@ export default function SearchBar({ value, onChangeText, onClear, totalCount }) 
         )}
       </View>
       <View style={styles.countBadge}>
-        <Text style={styles.countText}>{totalCount} títulos</Text>
+        <Text style={styles.countText}>{totalCount} coches</Text>
       </View>
     </View>
   );
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     color: theme.colors.textPrimary,
-    fontSize: 14,
+    fontSize: 13,
     height: '100%',
     padding: 0,
   },
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
   countText: {
     color: theme.colors.textSecondary,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });
-

@@ -15,9 +15,9 @@ export default function ClassGuideView() {
             resizeMode="contain"
           />
           <View style={styles.authorInfo}>
-            <Text style={styles.authorName}>Práctica 5: React Native</Text>
+            <Text style={styles.authorName}>Práctica 5: React Native (AutoVault)</Text>
             <Text style={styles.courseName}>2º SMX / DAM • CC Sant Josep Obrer</Text>
-            <Text style={styles.authorSub}>Desarrollado siguiendo el tutorial de Midudev</Text>
+            <Text style={styles.authorSub}>Desarrollado siguiendo la guía docente y Midudev</Text>
           </View>
         </View>
       </View>
@@ -33,12 +33,12 @@ export default function ClassGuideView() {
             <Text style={styles.pointNumber}>1</Text>
           </View>
           <View style={styles.pointTitleBox}>
-            <Text style={styles.pointTitle}>Inicialización con npx y Plantilla</Text>
+            <Text style={styles.pointTitle}>Creación del Proyecto con npx</Text>
             <Text style={styles.timestamp}>Minuto 23:03 del vídeo</Text>
           </View>
         </View>
         <Text style={styles.pointText}>
-          En este proyecto utilicé <Text style={styles.code}>npx create-expo-app</Text> en lugar de instalar paquetes de forma global con <Text style={styles.code}>npm install -g</Text>. Esto evita llenar de dependencias viejas el disco duro del ordenador y garantiza que siempre se descargue la última versión compatible del SDK de Expo (SDK 58).
+          En lugar de instalar herramientas globales pesadas con <Text style={styles.code}>npm install -g</Text>, inicialicé este catálogo de coches con <Text style={styles.code}>npx create-expo-app</Text>. Esto garantiza que se ejecute la versión más reciente del instalador de Expo sin ocupar espacio persistente en el sistema ni causar conflictos de permisos en los ordenadores del aula.
         </Text>
       </View>
 
@@ -54,7 +54,7 @@ export default function ClassGuideView() {
           </View>
         </View>
         <Text style={styles.pointText}>
-          Para diseñar y maquetar esta interfaz con agilidad, ejecuté primero la versión web mediante <Text style={styles.code}>npm run web</Text>. Desarrollar en el navegador permite aprovechar el <Text style={styles.bold}>Fast Refresh</Text> casi instantáneo e inspeccionar elementos con las DevTools de Chrome sin tener que esperar a que arranque un emulador pesado.
+          Para diseñar el diseño de las tarjetas de los vehículos, los filtros y el modal de detalles, utilicé <Text style={styles.code}>npm run web</Text>. Desarrollar en el navegador web acelera el flujo de trabajo gracias a la recarga instantánea (<Text style={styles.bold}>Fast Refresh</Text>) y al uso de Chrome DevTools, consumiendo apenas una fracción de la memoria RAM que requeriría un emulador de Android.
         </Text>
       </View>
 
@@ -65,18 +65,18 @@ export default function ClassGuideView() {
             <Text style={styles.pointNumber}>3</Text>
           </View>
           <View style={styles.pointTitleBox}>
-            <Text style={styles.pointTitle}>Plantilla Vacía (Blank Template)</Text>
+            <Text style={styles.pointTitle}>Arquitectura Limpia (Blank Template)</Text>
             <Text style={styles.timestamp}>Minuto 37:05 del vídeo</Text>
           </View>
         </View>
         <Text style={styles.pointText}>
-          Elegí la plantilla limpia <Text style={styles.bold}>blank</Text> para entender la arquitectura desde los cimientos. A diferencia de las plantillas complejas con código prefabricado, aquí cada archivo tiene una función clara:
+          Elegí deliberadamente la plantilla <Text style={styles.bold}>blank</Text> para tener control absoluto de cada fichero sin código pregenerado sobrante:
         </Text>
         <View style={styles.fileList}>
-          <Text style={styles.fileItem}>• <Text style={styles.bold}>App.js:</Text> Componente raíz donde se orquesta el catálogo, estados de búsqueda y navegación.</Text>
-          <Text style={styles.fileItem}>• <Text style={styles.bold}>index.js:</Text> Punto de entrada que registra la aplicación nativa.</Text>
-          <Text style={styles.fileItem}>• <Text style={styles.bold}>app.json:</Text> Manifiesto con los metadatos de Expo, iconos y pantalla de carga.</Text>
-          <Text style={styles.fileItem}>• <Text style={styles.bold}>src/components/:</Text> Componentes modulares propios (tarjetas, buscador, modal, etc.).</Text>
+          <Text style={styles.fileItem}>• <Text style={styles.bold}>App.js:</Text> Componente principal que orquesta el catálogo, búsqueda en tiempo real, favoritos y el modal de ficha técnica.</Text>
+          <Text style={styles.fileItem}>• <Text style={styles.bold}>src/data/cars.js:</Text> Colección de datos técnicos reales (caballos, aceleración, motor, precio).</Text>
+          <Text style={styles.fileItem}>• <Text style={styles.bold}>src/components/:</Text> Componentes desacoplados (CarCard, CarDetailModal, FeaturedHero, SearchBar...).</Text>
+          <Text style={styles.fileItem}>• <Text style={styles.bold}>app.json & package.json:</Text> Manifiesto de Expo y gestión de dependencias limpias.</Text>
         </View>
       </View>
 
@@ -92,7 +92,7 @@ export default function ClassGuideView() {
           </View>
         </View>
         <Text style={styles.pointText}>
-          En React Native no existen las etiquetas HTML convencionales:
+          En React Native no usamos etiquetas HTML del navegador:
         </Text>
         <View style={styles.nativeGrid}>
           <View style={styles.nativeCol}>
@@ -108,10 +108,10 @@ export default function ClassGuideView() {
             <Text style={styles.nativeRow}>&lt;img&gt;</Text>
           </View>
           <View style={[styles.nativeCol, { flex: 2 }]}>
-            <Text style={styles.nativeColHeader}>Particularidad</Text>
-            <Text style={styles.nativeRow}>flexDirection: 'column' por defecto.</Text>
-            <Text style={styles.nativeRow}>Obligatorio para cualquier texto plano.</Text>
-            <Text style={styles.nativeRow}>Usa require() en local o uri en remoto.</Text>
+            <Text style={styles.nativeColHeader}>Regla Clave</Text>
+            <Text style={styles.nativeRow}>flexDirection: 'column' por defecto (orientación vertical móvil).</Text>
+            <Text style={styles.nativeRow}>Obligatorio para cualquier texto plano (no admite texto suelto en View).</Text>
+            <Text style={styles.nativeRow}>Carga local con require() y remota con uri (requiere tamaño explícito).</Text>
           </View>
         </View>
       </View>
@@ -123,18 +123,18 @@ export default function ClassGuideView() {
             <Text style={styles.pointNumber}>5</Text>
           </View>
           <View style={styles.pointTitleBox}>
-            <Text style={styles.pointTitle}>Entorno: ¿Hace falta Android Studio o Xcode?</Text>
+            <Text style={styles.pointTitle}>Entorno: ¿Es obligatorio Android Studio o Xcode?</Text>
             <Text style={styles.timestamp}>Minuto 53:20 del vídeo</Text>
           </View>
         </View>
         <View style={styles.noBox}>
-          <Ionicons name="checkmark-circle" size={20} color={theme.colors.scoreGreen} />
+          <Ionicons name="checkmark-circle" size={20} color={theme.colors.turboGreen} />
           <Text style={styles.noText}>
-            <Text style={styles.bold}>Rotundamente NO.</Text> No es necesario instalar Android Studio (más de 15 GB) ni emuladores que saturan la memoria RAM del ordenador de clase.
+            <Text style={styles.bold}>No es necesario en absoluto.</Text> No hace falta instalar los 15+ GB de Android Studio ni configurar emuladores pesados que saturan los PCs del aula.
           </Text>
         </View>
         <Text style={styles.pointText}>
-          Podemos desarrollar cómodamente en la web y probar directamente en un móvil real escaneando el código QR con la app gratuita <Text style={styles.bold}>Expo Go</Text>.
+          Utilizando la aplicación gratuita <Text style={styles.bold}>Expo Go</Text> en el móvil físico (escaneando el código QR con la cámara) y el entorno web, se programa y depura de forma cómoda y ligera.
         </Text>
       </View>
 
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.racingRed,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   code: {
     fontFamily: 'monospace',
     backgroundColor: theme.colors.surfaceSubtle,
-    color: theme.colors.accentCyan,
+    color: theme.colors.sportBlue,
     paddingHorizontal: 4,
   },
   bold: {
@@ -289,11 +289,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: theme.colors.scoreGreenBg,
+    backgroundColor: 'rgba(16, 185, 129, 0.15)',
     padding: theme.spacing.sm,
     borderRadius: theme.borderRadius.sm,
     borderWidth: 1,
-    borderColor: theme.colors.scoreGreenBorder,
+    borderColor: theme.colors.turboGreen,
     marginBottom: theme.spacing.sm,
   },
   noText: {
@@ -303,4 +303,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-

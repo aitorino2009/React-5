@@ -3,7 +3,8 @@
 **Cicle Formatiu:** Formació Professional — Desenvolupament d'Aplicacions Multiplataforma / Web (2n SMX / DAM / DAW)  
 **Matèria:** Aplicacions Web / Desenvolupament d'Interfícies (APOF)  
 **Centre:** CC Sant Josep Obrer  
-**Recurs de referència:** [Tutorial en vídeo de Midudev (YouTube)](https://youtu.be/U23lNFm_J70)
+**Recurs de referència:** [Tutorial en vídeo de Midudev (YouTube)](https://youtu.be/U23lNFm_J70)  
+**Projecte Pràctic:** AutoVault (Catàleg d'Automobilisme & Altes Prestacions)
 
 ---
 
@@ -45,17 +46,17 @@
 ### 2.1 Justificació pedagògica i tècnica del desenvolupament inicial a Navegador Web
 Una de les millors pràctiques destacades al curs de Midudev és **iniciar el desenvolupament, maquetació i iteració de la interfície d'usuari al navegador web** (`npm run web`), en lloc d'engegar emuladors pesants de forma prematura.
 
-### 2.2 Beneficis directes d'aquesta estratègia:
-1. **Iteració ultraràpida amb Fast Refresh:** Els canvis a `App.js` o components es reflecteixen al navegador en mil·lisegons sense perdre l'estat actual de la pantalla.
+### 2.2 Beneficis directes d'aquesta estratègia a AutoVault:
+1. **Iteració ultraràpida amb Fast Refresh:** Els canvis a les targetes dels cotxes (`CarCard.js`), la paleta de colors o els filtres es reflecteixen al navegador en mil·lisegons sense perdre l'estat actual de la pantalla.
 2. **Inspecció visual immediata amb Chrome DevTools:** Permet depurar l'arbre d'elements, la jerarquia Flexbox, la consola i l'emmagatzematge amb eines conegudes.
 3. **Consum mínim de recursos:** Un navegador consumeix una fracció mínima de memòria RAM en comparació amb un emulador AVD d'Android o el simulador d'iOS.
 4. **Agilitat a l'aula:** Als ordinadors de centres educatius amb maquinari limitat, engegar emuladors pot saturar el sistema. Treballar primer en web garanteix la màxima fluïdesa.
 
 ### 2.3 Quan passar a dispositius mòbils?
 Un cop validada l'estructura visual en web, es passa al telèfon físic mitjançant **Expo Go (escanejant el codi QR)** per comprovar:
-- Resposta a gestos tàctils reals (*touch targets*, desplaçament natiu).
+- Resposta a gestos tàctils reals (*touch targets*, desplaçament natiu a la llista de cotxes).
 - Dimensions reals de pantalles mòbils (*notch*, barres d'estat).
-- APIs natives del dispositiu (càmera, acceleròmetre, geolocalització, notificacions).
+- Rendiment de les fotografies dels vehicles amb diferents resolucions de pantalla.
 
 ---
 
@@ -73,22 +74,19 @@ Partir d'una **plantilla neta (*blank*)**:
 
 - **`App.js`:**
   - Component arrel de l'aplicació.
-  - Defineix la interfície principal que es renderitza en obrir l'app.
-  - A la plantilla buida conté un contenidor `<View>` amb un missatge de benvinguda i la barra d'estat `<StatusBar />`.
+  - Gestiona l'estat global: cerca en temps real, filtres per categoria, garatge personal de favorits i el modal de fitxa tècnica.
 - **`index.js`:**
-  - Punt d'arrencada tècnic.
-  - Importa `registerRootComponent` d'Expo i registra el component `App` a l'`AppRegistry` natiu de React Native.
+  - Punt d'arrencada tècnic que registra el component `App` mitjançant `registerRootComponent(App)` d'Expo.
+- **`metro.config.js`:**
+  - Configuració oficial de Metro Bundler que resol de forma òptima els mòduls i recursos del projecte.
 - **`app.json`:**
-  - Manifest de configuració d'Expo.
-  - Defineix metadades clau: nom de l'app, *slug*, versió, orientació de pantalla, icones, pantalla de càrrega (*splash*) i identificadors natius (`package` per a Android i `bundleIdentifier` per a iOS).
+  - Manifest de configuració d'Expo on es configuren el nom (`AutoVault`), *slug*, versió, orientació de pantalla i icones.
 - **`package.json`:**
-  - Fitxer estàndard de Node.js amb metadades, dependències (`expo`, `react`, `react-native`, etc.) i scripts d'execució (`start`, `android`, `ios`, `web`).
-- **`package-lock.json`:**
-  - Assegura la instal·lació determinista i exacta de les mateixes versions de dependències per a qualsevol membre de l'equip.
-- **`assets/`:**
-  - Carpeta per a recursos estàtics: icones (`icon.png`), imatge de càrrega (`splash-icon.png`) i gràfics locals.
-- **`.gitignore`:**
-  - Especifica quins fitxers no s'han d'afegir al control de versions Git (`node_modules/`, `.expo/`, fitxers temporals).
+  - Fitxer estàndard de Node.js amb metadades, dependències i scripts d'execució.
+- **`src/data/cars.js`:**
+  - Base de dades local estructurada amb els cotxes, especificacions mecàniques i crítiques.
+- **`src/components/`:**
+  - Components modulars reutilitzables (`CarCard.js`, `CarDetailModal.js`, `FeaturedHero.js`, `SearchBar.js`...).
 
 ---
 
@@ -104,47 +102,44 @@ React Native no empra HTML ni el DOM clàssic. El codi JSX s'associa a component
 
 | Component React Native | Equivalent HTML | Descripció i Bones Pràctiques |
 | :--- | :--- | :--- |
-| **`<View>`** | `<div>` | Contenidor fonamental per estructurar la interfície. Suporta Flexbox, vores, fons i esdeveniments tàctils. |
-| **`<Text>`** | `<p>` / `<span>` | Component obligatori per renderitzar text. Suporta niament d'estils tipogràfics. |
-| **`<Image>`** | `<img>` | Component per mostrar imatges locals o remotes. Requereix mides explícites per a imatges remotes. |
+| **`<View>`** | `<div>` | Contenidor fonamental per estructurar les targetes dels cotxes. Empra Flexbox per defecte. |
+| **`<Text>`** | `<p>` / `<span>` | Component obligatori per renderitzar qualsevol text (marca, model, cavalls de potència). |
+| **`<Image>`** | `<img>` | Component per mostrar les fotografies dels vehicles (locals o remotes). |
 
 ### 4.3 Diferència clau de Flexbox: `flexDirection`
 - **A la Web clàssica (CSS):** La propietat `flex-direction` té per defecte el valor **`row`** (disposició horitzontal en fila).
 - **A React Native:** La propietat `flexDirection` té per defecte el valor **`column`** (disposició vertical en columna).
-  - *Motiu tècnic:* Els telèfons mòbils tenen pantalles predominantment verticals, de manera que el flux natural dels elements és de dalt a baix.
+  - *Motiu tècnic:* Els telèfons mòbils tenen pantalles predominantment verticals, de manera que el flux natural dels cotxes és apilar-se de dalt a baix.
 
 ### 4.4 Regla estricta del component `<Text>`
 A diferència d'HTML, a React Native està **estrictament prohibit** posar text lliure dins una `<View>`:
 ```jsx
 // ❌ ERROR a React Native
-<View>Hola món</View>
+<View>Porsche 911 GT3 RS</View>
 
 // ✅ CORRECTE a React Native
 <View>
-  <Text>Hola món</Text>
+  <Text>Porsche 911 GT3 RS</Text>
 </View>
 ```
 
 ### 4.5 Càrrega d'Imatges: Locals vs Remotes
+A **AutoVault** s'apliquen tots dos mètodes:
 1. **Imatges Locals (estàtiques):**
    ```jsx
-   <Image source={require('./assets/icon.png')} style={{ width: 50, height: 50 }} />
+   <Image source={require('./assets/icon.png')} style={{ width: 48, height: 48 }} />
    ```
-   - S'empaqueten amb el paquet de l'aplicació mitjançant `require()`.
-   - La seva mida original és coneguda en temps de compilació.
-
-2. **Imatges Remotes (per xarxa via URI):**
+2. **Imatges Remotes (fotografies de vehicles per URL):**
    ```jsx
-   <Image source={{ uri: 'https://exemple.cat/foto.jpg' }} style={{ width: 100, height: 100 }} />
+   <Image source={{ uri: car.image }} style={{ width: '100%', height: 160 }} resizeMode="cover" />
    ```
-   - Empren un objecte amb la propietat `uri`.
    - **Obligatori:** Cal especificar sempre `width` i `height` als estils per poder visualitzar-les.
 
 ---
 
 ## Punt 5 (Minut 53:20): Requisits d'Entorn i Dubtes Freqüents
 
-### 5.1 Pregunta Clau: És obligatori instal·lar Android Studio o Xcode per començar?
+### 5.1 Pregunta Clave: És obligatori instal·lar Android Studio o Xcode per començar?
 > **Resposta oficial i fonamentada: NO ÉS OBLIGATORI.**
 
 ### 5.2 Justificació i alternatives lleugeres recomanades:
@@ -154,7 +149,7 @@ Per aprendre React Native, practicar components natius, disseny amb Flexbox i es
    - S'instal·la l'aplicació gratuïta **Expo Go** (des de Google Play o App Store).
    - S'executa a la terminal:
      ```bash
-     npx expo start
+     npm start
      ```
    - S'escaneja el codi QR generat i l'app s'executa a l'instant al dispositiu real amb recàrrega en temps real.
 2. **Entorn Web al navegador:**
@@ -169,4 +164,3 @@ Només és necessari en etapes avançades quan:
 - Cal enllaçar codi natiu personalitzat en C++, Java, Kotlin, Swift o Objective-C.
 - Es volen compilar i signar binaris de distribució (`.apk`, `.aab`, `.ipa`) en local sense emprar serveis al núvol com EAS Build.
 - Es requereix depuració nativa de baix nivell amb Android Profiler o Instruments.
-
