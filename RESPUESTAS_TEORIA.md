@@ -179,3 +179,4 @@ Solo se requiere instalar entornos nativos completos en fases avanzadas del cicl
 - Se desarrollan módulos nativos personalizados en C++, Java, Kotlin, Swift u Objective-C.
 - Se requiere compilar y firmar localmente los paquetes binarios de distribución (`.apk`, `.aab`, `.ipa`) sin utilizar servicios en la nube como EAS Build (`eas build`).
 - Se necesita depuración a bajo nivel del hilo nativo o profiling profundo de memoria con Android Profiler / Instruments.
+

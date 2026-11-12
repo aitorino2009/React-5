@@ -169,3 +169,4 @@ Només és necessari en etapes avançades quan:
 - Cal enllaçar codi natiu personalitzat en C++, Java, Kotlin, Swift o Objective-C.
 - Es volen compilar i signar binaris de distribució (`.apk`, `.aab`, `.ipa`) en local sense emprar serveis al núvol com EAS Build.
 - Es requereix depuració nativa de baix nivell amb Android Profiler o Instruments.
+
